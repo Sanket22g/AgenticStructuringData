@@ -1,6 +1,6 @@
 # AgenticStructuringData
 
-ProjectJobChange is a small example project demonstrating a multi-agent architecture (a "crew") using the crewAI-style pattern. It shows how multiple agents, each with specific roles and tools, collaborate to complete tasks defined in configuration files.
+AgenticStructuringData is a small example project demonstrating a multi-agent architecture (a "crew") using the crewAI-style pattern. It shows how multiple agents, each with specific roles and tools, collaborate to complete tasks defined in configuration files.
 
 **Goals:**
 - Produce outputs in the company's required Excel format (see `src/project_job_change/tools/custom_tool.py`). The crew's primary purpose is to extract, normalize, validate, and export tabular records into an Excel workbook that matches the company's column/format requirements.
@@ -11,7 +11,7 @@ ProjectJobChange is a small example project demonstrating a multi-agent architec
 
 This project includes a deterministic helper tool that writes rows in the exact schema the company expects. See `src/project_job_change/tools/custom_tool.py` for the implementation and the full list of columns:
 
-- `company_division_name`, `product_name`, `opening_units`, `purchase_units`, `purchase_free`, `purchase_return`, `sales_units`, `sales_free`, `sales_return`, `closing_units`, `stock_code`, `from_date`, `to_date`, `ptr`, `formula`
+- `company__name`, `product_name`, `opening_units`, `purchase_units`, `purchase_free`, `purchase_return`, `sales_units`, `sales_free`, `sales_return`, `closing_units`, `stock_code`, `from_date`, `to_date`, `ptr`, `mrp`, `rate`, `value`, `company_division_name`, `company_division_code`, `company_division_type`, `company_division_region`, `company_division_state`, `company_division_city`, `company_division_area`, `company_division_zone`, `company_division_territory`, `company_division_channel`, `company_division_subchannel`.
 
 How it is used:
 
@@ -20,7 +20,7 @@ How it is used:
 - Configure output path and worksheet name via the task inputs (e.g. `output_path` and `sheet_name`) so the produced file fits the company's ingestion pipeline.
 
 Quick example (agent / task passes to tool):
-
+h
 ```python
 # records = [ {"company_division_name": "Div A", "product_name": "P1", ...}, ... ]
 # call the tool with records and optional path

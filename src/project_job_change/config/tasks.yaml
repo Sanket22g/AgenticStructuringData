@@ -1,0 +1,54 @@
+pdf_extraction_task:
+  description: >
+    Use the pdf_extractor tool to read the PDF file located at {pdf_path}.
+    Extract all rows of data from the report. Each row represents one product entry
+    and must contain all of the following fields:
+      - company_division_name
+      - product_name
+      - opening_units
+      - purchase_units
+      - purchase_free
+      - purchase_return
+      - sales_units
+      - sales_free
+      - sales_return
+      - closing_units
+      - stock_code
+      - from_date (in YYYY/MM/DD format)
+      - to_date (in YYYY/MM/DD format)
+      - ptr
+      - formula
+
+    After extracting all data, write it to a JSON file at F:/project_job_change/data.json
+    as a list of records. Make sure all numeric fields are numbers (not strings)
+    and date fields follow the YYYY/MM/DD format.
+  expected_output: >
+    A JSON file saved at F:/project_job_change/data.json containing a list of all
+    extracted product records. Also return the full raw extracted text from the PDF
+    so the verifier agent can use it for cross-checking.
+  agent: pdf_extractor_agent
+
+data_verification_task:
+  description: >
+    You will receive the raw plain text extracted from the PDF and the structured data
+    produced by the extractor agent.
+
+    Your job is to:
+    - Carefully compare every field value against the raw PDF text.
+    - Identify and correct any mistakes such as:
+        * Misread numbers (e.g. 0 instead of 6, 1 instead of 7)
+        * Wrong product names or division names
+        * Swapped column values
+        * Missing rows that appear in the PDF text but not in the structured data
+        * Incorrect date formats (must be YYYY/MM/DD)
+    - Once all corrections are made, call the json_to_excel tool.
+    - Pass the corrected records DIRECTLY as a list of dicts to the tool.
+    - You can choose any output_path for the Excel file, for example:
+        'F:/project_job_change/pharma_stock_report.xlsx'
+    - Do NOT try to read from a JSON file. Pass the data inline.
+  expected_output: >
+    A corrected Excel file saved to your chosen output path, with all rows
+    accurately reflecting the original PDF data. Also provide a brief summary of
+    what corrections were made (if any).
+  agent: data_verifier_agent
+

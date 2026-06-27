@@ -1,0 +1,27 @@
+[project]
+name = "project_job_change"
+version = "0.1.0"
+description = "Project_job_change using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[google-genai,tools]==1.11.0",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.4.8",
+    "pypdf>=6.14.2",
+]
+
+[project.scripts]
+project_job_change = "project_job_change.main:run"
+run_crew = "project_job_change.main:run"
+train = "project_job_change.main:train"
+replay = "project_job_change.main:replay"
+test = "project_job_change.main:test"
+run_with_trigger = "project_job_change.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

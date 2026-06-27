@@ -111,4 +111,4 @@ Notes:
 Feel free to open issues or pull requests. Small improvements that clarify agent responsibilities or add tests are especially welcome.
 
 ---
-Made as a compact reference for understanding and extending the multi-agent crew in this repository.
+Made as a compact reference for understanding and extending the multi-agent crew in this repository
